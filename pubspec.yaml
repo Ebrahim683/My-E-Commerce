@@ -43,6 +43,15 @@ dependencies:
   flutter_phosphor_icons: ^0.0.1+6
   # screen size
   flutter_screenutil: ^5.5.4
+  # firebase
+  firebase_core: ^2.1.0
+  firebase_auth: ^4.0.2
+  firebase_database: ^10.0.2
+  firebase_storage: ^11.0.2
+  # font
+
+
+ 
 
 dev_dependencies:
   flutter_test:
