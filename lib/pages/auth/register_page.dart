@@ -100,6 +100,7 @@ class _RegisterPageState extends State<RegisterPage> {
                             borderRadius: BorderRadius.circular(50.r),
                           ),
                           child: TextField(
+                            keyboardType: TextInputType.emailAddress,
                             controller: emailController,
                             maxLines: 1,
                             textAlign: TextAlign.center,

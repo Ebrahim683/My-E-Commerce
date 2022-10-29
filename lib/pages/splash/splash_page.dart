@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
+import 'package:my_e_commerce/controller/splash_controller.dart';
 import 'package:my_e_commerce/pages/auth/login_page.dart';
 
 class SplashPage extends StatefulWidget {
@@ -11,19 +12,10 @@ class SplashPage extends StatefulWidget {
 }
 
 class _SplashPageState extends State<SplashPage> {
-  splashTimer() async {
-    Future.delayed(
-      const Duration(milliseconds: 5500),
-      () {
-        Get.off(() => const LoginPage());
-      },
-    );
-  }
-
   @override
   void initState() {
     super.initState();
-    splashTimer();
+    SplashController.navigate();
   }
 
   @override

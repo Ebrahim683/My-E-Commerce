@@ -17,7 +17,6 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
@@ -62,6 +61,7 @@ class _LoginPageState extends State<LoginPage> {
                                 borderRadius: BorderRadius.circular(50.r),
                               ),
                               child: TextField(
+                                keyboardType: TextInputType.emailAddress,
                                 controller: emailController,
                                 maxLines: 1,
                                 textAlign: TextAlign.center,
@@ -126,6 +126,7 @@ class _LoginPageState extends State<LoginPage> {
                           ],
                         ),
                         SizedBox(height: 35.h),
+                        //login button
                         Container(
                           margin: EdgeInsets.symmetric(horizontal: 30.w),
                           decoration: BoxDecoration(
@@ -134,32 +135,90 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                           width: Get.width,
                           child: MaterialButton(
-                              onPressed: () {
-                                var email = emailController.text.trim();
-                                var password = passwordController.text.trim();
-                                if (email.isEmpty) {
-                                  Get.snackbar('Error', 'Enter email adress');
-                                } else if (password.isEmpty) {
-                                  Get.snackbar('Errro', 'Enter password');
-                                } else {
-                                  setState(() {
-                                    FirebaseHelper.isLoading.value = true;
-                                  });
-                                  FirebaseHelper.userLogin(email, password);
-                                }
-                              },
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Lottie.asset(Icons8.login,
-                                      height: 20.h, width: 20.w),
-                                  SizedBox(width: 10.w),
-                                  Text(
-                                    'LOGIN',
-                                    style: AppConst.textStyle(Colors.black),
-                                  ),
-                                ],
-                              )),
+                            onPressed: () {
+                              var email = emailController.text.trim();
+                              var password = passwordController.text.trim();
+                              if (email.isEmpty) {
+                                Get.snackbar('Error', 'Enter email adress');
+                              } else if (password.isEmpty) {
+                                Get.snackbar('Errro', 'Enter password');
+                              } else {
+                                setState(() {
+                                  FirebaseHelper.isLoading.value = true;
+                                });
+                                FirebaseHelper.userLogin(email, password);
+                              }
+                            },
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Lottie.asset(Icons8.login,
+                                    height: 20.h, width: 20.w),
+                                SizedBox(width: 10.w),
+                                Text(
+                                  'LOGIN',
+                                  style: AppConst.textStyle(Colors.black),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        SizedBox(height: 10.h),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            SizedBox(
+                              height: 0.5.h,
+                              width: Get.width * 0.3,
+                              child: Container(
+                                color: Colors.white,
+                              ),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 10.w),
+                              child: Text(
+                                'or',
+                                style: AppConst.textStyle(Colors.white),
+                              ),
+                            ),
+                            SizedBox(
+                              height: 0.5.h,
+                              width: Get.width * 0.3,
+                              child: Container(
+                                color: Colors.white,
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(height: 10.h),
+                        //google sign in button
+                        Container(
+                          margin: EdgeInsets.symmetric(horizontal: 30.w),
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(50.r),
+                          ),
+                          width: Get.width,
+                          child: MaterialButton(
+                            onPressed: () {
+                              FirebaseHelper.isLoading.value = true;
+                              FirebaseHelper.googleSignin();
+                            },
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Lottie.asset(
+                                    'asset/lottie/googleAnimation.json',
+                                    height: 25.h,
+                                    width: 25.w),
+                                SizedBox(width: 10.w),
+                                Text(
+                                  'LOGIN WITH GOOGLE',
+                                  style: AppConst.textStyle(Colors.black),
+                                ),
+                              ],
+                            ),
+                          ),
                         ),
                         SizedBox(height: 15.h),
                         GestureDetector(
@@ -169,7 +228,6 @@ class _LoginPageState extends State<LoginPage> {
                             style: AppConst.textStyle(Colors.white),
                           ),
                         ),
-                        SizedBox(height: 15.h),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
