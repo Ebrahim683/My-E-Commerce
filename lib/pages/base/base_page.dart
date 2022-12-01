@@ -1,12 +1,19 @@
 import 'dart:developer';
-import 'dart:html';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_animated_icons/icons8.dart';
+import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
+import 'package:my_e_commerce/constant/app_const.dart';
 import 'package:my_e_commerce/controller/theme_controller.dart';
+import 'package:my_e_commerce/pages/auth/login_page.dart';
+import 'package:my_e_commerce/pages/cart/cart_page.dart';
+import 'package:my_e_commerce/pages/category/category_page.dart';
+import 'package:my_e_commerce/pages/home/home_page.dart';
+import 'package:my_e_commerce/pages/profile/profile_page.dart';
+import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 
 class BasePage extends StatefulWidget {
   const BasePage({super.key});
@@ -17,66 +24,48 @@ class BasePage extends StatefulWidget {
 
 class _BasePageState extends State<BasePage> {
   // ThemeController themeController = Get.find();
+  final pages = [
+    const HomePage(),
+    const CategoryPage(),
+    const CartPage(),
+    const ProfilePage()
+  ];
+  var selectedPage = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: AppConst.appBarColor,
         title: const Text('My-Commerce'),
-        leading: Container(
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(30.r),
-          ),
-          child: IconButton(
-              onPressed: () {
-                Scaffold.of(context).openDrawer();
-              },
-              icon: const Icon(Icons.menu)),
-        ),
-        // actions: [
-        //   GetBuilder<ThemeController>(
-        //     builder: (controller) => Switch(
-        //         value: controller.isDark,
-        //         onChanged: (state) {
-        //           controller.changeTheme(state);
-        //           log('$state');
-        //         }),
-        //   ),
-        // ],
       ),
-      body: const SingleChildScrollView(
-        child: Center(
-          child: Text('sdjfhdjk'),
-        ),
-      ),
-      drawer: _drawer(),
+      body: pages[selectedPage],
+      bottomNavigationBar: bottomNav(),
     );
   }
 
-  Widget _drawer() {
-    return ClipRRect(
-      borderRadius: BorderRadius.only(
-          topRight: Radius.circular(50.r), bottomRight: Radius.circular(50.r)),
-      child: Drawer(
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              SizedBox(
-                height: 100.h,
-                width: Get.size.width,
-              ),
-              SizedBox(height: 5.h),
-              const Divider(color: Colors.grey),
-              SizedBox(height: 5.h),
-              ListTile(
-                onTap: () {},
-                leading: Lottie.asset(Icons8.home),
-                title: const Text('Home'),
-              ),
-            ],
-          ),
-        ),
-      ),
+  Widget bottomNav() {
+    return SalomonBottomBar(
+      items: [
+        SalomonBottomBarItem(
+            icon: const Icon(PhosphorIcons.house), title: const Text('Home')),
+        SalomonBottomBarItem(
+            icon: const Icon(PhosphorIcons.archive_box),
+            title: const Text('Category')),
+        SalomonBottomBarItem(
+            icon: const Icon(PhosphorIcons.shopping_cart),
+            title: const Text('Cart')),
+        SalomonBottomBarItem(
+            icon: const Icon(PhosphorIcons.person),
+            title: const Text("Profile")),
+      ],
+      currentIndex: selectedPage,
+      onTap: (value) {
+        setState(() {
+          selectedPage = value;
+        });
+      },
+      selectedItemColor: AppConst.bottomNavSelectedIconColor,
+      unselectedItemColor: AppConst.bottomNavIconColor,
     );
   }
 }

@@ -48,8 +48,13 @@ dependencies:
   firebase_auth: ^4.0.2
   firebase_database: ^10.0.2
   firebase_storage: ^11.0.2
+  cloud_firestore: ^4.1.0
   # google sign in
   google_sign_in: ^5.4.2
+  #slider
+  velocity_x: ^3.6.0
+  #bottom nav
+  salomon_bottom_bar: ^3.3.1
 
 
  
