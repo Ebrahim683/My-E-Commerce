@@ -1,7 +1,9 @@
 import 'dart:developer';
 
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:my_e_commerce/constant/app_const.dart';
 import 'package:my_e_commerce/pages/auth/login_page.dart';
 import 'package:my_e_commerce/pages/base/base_page.dart';
 import 'package:my_e_commerce/utils/get_storage_manager.dart';
@@ -25,7 +27,7 @@ class FirebaseHelper extends GetxController {
     } on FirebaseAuthException catch (e) {
       isLoading.value = false;
       log('auth: ${e.message}');
-      Get.snackbar('Errro', '${e.message}');
+      Get.snackbar('Errro', '${e.message}', colorText: Colors.white);
     }
   }
 
@@ -42,7 +44,7 @@ class FirebaseHelper extends GetxController {
     } on FirebaseAuthException catch (e) {
       isLoading.value = false;
       log('auth: ${e.message}');
-      Get.snackbar('Errro', '${e.message}');
+      AppConst.snackbar(title: 'Error', msg: '${e.message}');
     }
   }
 
@@ -66,7 +68,7 @@ class FirebaseHelper extends GetxController {
     } catch (e) {
       isLoading.value = false;
       log('google auth: $e');
-      Get.snackbar('Errro', '$e');
+      AppConst.snackbar(title: 'Error', msg: '$e');
     }
   }
 }

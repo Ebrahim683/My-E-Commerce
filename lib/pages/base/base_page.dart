@@ -28,15 +28,32 @@ class _BasePageState extends State<BasePage> {
     const HomePage(),
     const CategoryPage(),
     const CartPage(),
-    const ProfilePage()
   ];
   var selectedPage = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: AppConst.appBarColor,
-        title: const Text('My-Commerce'),
+        backgroundColor: AppConst.backgroundColor,
+        actions: [
+          InkWell(
+            child: const Icon(
+              Icons.notifications,
+              color: Colors.teal,
+            ),
+          ),
+          SizedBox(width: 10.w),
+          InkWell(
+            onTap: () {
+              Get.to(const ProfilePage());
+            },
+            child: CircleAvatar(
+              radius: 10.r,
+              child: Image.asset('asset/images/wallet.png'),
+            ),
+          ),
+          SizedBox(width: 10.w),
+        ],
       ),
       body: pages[selectedPage],
       bottomNavigationBar: bottomNav(),
@@ -54,9 +71,6 @@ class _BasePageState extends State<BasePage> {
         SalomonBottomBarItem(
             icon: const Icon(PhosphorIcons.shopping_cart),
             title: const Text('Cart')),
-        SalomonBottomBarItem(
-            icon: const Icon(PhosphorIcons.person),
-            title: const Text("Profile")),
       ],
       currentIndex: selectedPage,
       onTap: (value) {

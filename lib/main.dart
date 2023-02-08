@@ -27,6 +27,7 @@ class _MyAppState extends State<MyApp> {
     return ScreenUtilInit(
       builder: (context, child) => GetMaterialApp(
         theme: ThemeData(
+          useMaterial3: true,
           scaffoldBackgroundColor: AppConst.backgroundColor,
         ),
         themeMode: ThemeMode.system,
